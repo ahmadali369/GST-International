@@ -4,9 +4,9 @@ import { Footer } from "@/components/Footer";
 import { PageHero, SectionEyebrow, SectionTitle } from "@/components/Section";
 import { Tilt } from "@/components/Tilt";
 import { WorldMap } from "@/components/WorldMap";
-import leader1 from "@/assets/leader-founder.jpg";
-import leader2 from "@/assets/leader-chairman.jpg";
-import leader3 from "@/assets/leader-cfo.jpg";
+import asifImage from "@/assets/engr-asif.jpg";
+import zahoorImage from "@/assets/zahoor-ahmed.jpg";
+import asadImage from "@/assets/asad-mehmood.jpg";
 
 import { ArrowRight, Target, Eye, Heart, Shield, Sparkles, Handshake, ScrollText } from "lucide-react";
 
@@ -35,21 +35,21 @@ const LEADERS = [
   {
     name: "Mr. Zahoor Ahmed",
     role: "Founder — GST Group",
-    img: leader1,
+    img: zahoorImage,
     quote:
       "When I established GST Group in 2000, my vision was to create a company that stands on trust, quality, and integrity. Today, with a strong leadership team and a committed workforce, our values continue to guide us toward greater milestones.",
   },
   {
     name: "Engr. Asif Mehmood",
     role: "Co-Founder / Chairman",
-    img: leader2,
+    img: asifImage,
     quote:
       "It is my privilege to lead a company that has grown from humble beginnings into a trusted name in engineering, construction, and industrial solutions. Our success is built on teamwork, uncompromising quality, and earned trust.",
   },
   {
     name: "Mr. Asad Mehmood",
     role: "Country CFO",
-    img: leader3,
+    img: asadImage,
     quote:
       "Financial strength is the backbone of sustainable growth. My responsibility is to ensure transparency, accountability, and disciplined planning across every project we deliver.",
   },
@@ -136,7 +136,11 @@ function About() {
                   src={l.img}
                   alt={`${l.name}, ${l.role} at GST Group`}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                  className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${
+                    l.name === "Engr. Asif Mehmood" || l.name === "Mr. Zahoor Ahmed"
+                      ? "object-[center_60%]"
+                      : "object-top"
+                  }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent" />
                 <div className="absolute bottom-4 left-5 right-5">

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import logo from "@/assets/gst-logo.png";
 import { useCart } from "@/hooks/useCart";
@@ -17,22 +17,42 @@ const NAV = [
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [lightSurface, setLightSurface] = useState(false);
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const { getItemCount } = useCart();
   const cartCount = getItemCount();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 30);
+
+      const header = headerRef.current;
+      if (!header) return;
+
+      const previousPointerEvents = header.style.pointerEvents;
+      header.style.pointerEvents = "none";
+      const point = document.elementFromPoint(
+        window.innerWidth / 2,
+        Math.min(header.getBoundingClientRect().bottom + 8, window.innerHeight - 1),
+      );
+      header.style.pointerEvents = previousPointerEvents;
+      setLightSurface(Boolean(point?.closest(".light-band")));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8 xl:px-10 pt-3 sm:pt-4">
-        <div className={`glass-strong mx-auto max-w-[1536px] rounded-2xl transition-all duration-500 ${scrolled ? "shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]" : ""}`}>
+      <header ref={headerRef} className="fixed inset-x-0 top-0 z-50 px-4 sm:px-6 lg:px-8 xl:px-10 pt-3 sm:pt-4">
+        <div className={`glass-strong header-shell mx-auto max-w-[1536px] rounded-2xl transition-all duration-500 ${lightSurface ? "light-header" : ""} ${scrolled ? "shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)]" : ""}`}>
           <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10 py-3">
             <Link to="/" className="flex items-center gap-3 group hover-3d">
               <img

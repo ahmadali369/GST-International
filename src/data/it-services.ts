@@ -5,6 +5,10 @@ import {
   Layout, Settings2, Link2,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import ecommerceImage from "@/assets/ecommerce-development.jpg";
+import restaurantPosImage from "@/assets/restaurant-pos.jpg";
+import crmDevelopmentImage from "@/assets/crm-development.jpg";
+import odooInventoryImage from "@/assets/odoo-inventory-warehouse-dashboard.svg";
 
 export interface ITService {
   id: string;
@@ -60,7 +64,7 @@ export const IT_SERVICES: ITService[] = [
     description: "Real-time stock management, barcode scanning, and multi-warehouse logistics optimization.",
     category: "odoo",
     icon: Package,
-    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=80&auto=format&fit=crop",
+    img: odooInventoryImage,
   },
   {
     id: "odoo-hr",
@@ -94,7 +98,7 @@ export const IT_SERVICES: ITService[] = [
     description: "High-performance corporate websites built with modern frameworks and SEO best practices.",
     category: "it",
     icon: Monitor,
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80&auto=format&fit=crop",
   },
   {
     id: "ecommerce-dev",
@@ -102,7 +106,7 @@ export const IT_SERVICES: ITService[] = [
     description: "Scalable online stores with secure payments, inventory sync, and conversion optimization.",
     category: "it",
     icon: ShoppingCart,
-    img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80&auto=format&fit=crop",
+    img: ecommerceImage,
   },
   {
     id: "mobile-dev",
@@ -110,7 +114,7 @@ export const IT_SERVICES: ITService[] = [
     description: "Native and cross-platform mobile applications for iOS and Android with premium UX.",
     category: "it",
     icon: Smartphone,
-    img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80&auto=format&fit=crop",
   },
   {
     id: "custom-software",
@@ -118,7 +122,7 @@ export const IT_SERVICES: ITService[] = [
     description: "Bespoke software solutions engineered to solve your specific business challenges.",
     category: "it",
     icon: Code2,
-    img: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80&auto=format&fit=crop",
   },
   {
     id: "restaurant-pos",
@@ -126,7 +130,7 @@ export const IT_SERVICES: ITService[] = [
     description: "Specialized POS systems for dine-in, takeaway, and delivery with kitchen display integration.",
     category: "it",
     icon: Utensils,
-    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80&auto=format&fit=crop",
+    img: restaurantPosImage,
   },
   {
     id: "online-ordering",
@@ -134,7 +138,7 @@ export const IT_SERVICES: ITService[] = [
     description: "White-label ordering platforms with real-time tracking and multi-channel integration.",
     category: "it",
     icon: Layout,
-    img: "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80&auto=format&fit=crop",
   },
   {
     id: "ui-ux",
@@ -142,7 +146,7 @@ export const IT_SERVICES: ITService[] = [
     description: "User-centered design with wireframing, prototyping, and usability testing for digital products.",
     category: "it",
     icon: Palette,
-    img: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80&auto=format&fit=crop",
   },
   {
     id: "business-automation",
@@ -158,7 +162,7 @@ export const IT_SERVICES: ITService[] = [
     description: "Intelligent automation, chatbots, predictive analytics, and machine learning solutions.",
     category: "it",
     icon: Brain,
-    img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+    img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80&auto=format&fit=crop",
   },
   {
     id: "crm-dev",
@@ -166,7 +170,7 @@ export const IT_SERVICES: ITService[] = [
     description: "Custom CRM platforms built to fit your sales process, customer journey, and reporting needs.",
     category: "it",
     icon: Users,
-    img: "https://images.unsplash.com/photo-1534536281715-e28d76689b4d?w=800&q=80&auto=format&fit=crop",
+    img: crmDevelopmentImage,
   },
   {
     id: "erp-dev",
