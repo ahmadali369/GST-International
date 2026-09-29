@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import logoFull from "@/assets/gst-logo.png";
+import businessBayImage from "@/assets/images.jfif?url";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SectionEyebrow, SectionTitle } from "@/components/Section";
@@ -39,7 +40,7 @@ const DUBAI_GALLERY = [
   { img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80", label: "Downtown Dubai" },
   { img: "https://images.unsplash.com/photo-1526495124232-a04e1849168c?w=1200&q=80", label: "Dubai Marina" },
   { img: "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=80", label: "Sheikh Zayed Road" },
-  { img: "/business-bay-generated.jpg", label: "Business Bay" },
+  { img: businessBayImage, label: "Business Bay" },
 ];
 
 const CLIENTS = [
