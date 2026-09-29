@@ -39,7 +39,7 @@ const DUBAI_GALLERY = [
   { img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80", label: "Downtown Dubai" },
   { img: "https://images.unsplash.com/photo-1526495124232-a04e1849168c?w=1200&q=80", label: "Dubai Marina" },
   { img: "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=80", label: "Sheikh Zayed Road" },
-  { img: "https://images.unsplash.com/photo-1546412414-e1885259563a?w=1200&q=80", label: "Business Bay" },
+  { img: "/business-bay-generated.jpg", label: "Business Bay" },
 ];
 
 const CLIENTS = [
@@ -77,7 +77,7 @@ function Home() {
 }
 
 const COMPANIES = [
-  { name: "General Solutions Contracting Company", desc: "Turnkey Civil & Structural Engineering", tag: "175+ Delivered Projects" },
+  { name: "General Solutions Contracting Company", desc: "Turnkey Civil & Structural Engineering", tag: "500+ Delivered Projects" },
   { name: "Hulul Alkhalij Technical Services L.L.C", desc: "Gulf Technical & Civil Solutions", tag: "Dubai · ISO Certified" },
   { name: "General Solutions Trading Company (Private) Limited", desc: "Global Materials & Supply Chain", tag: "Import / Export Hub" },
   { name: "Bright Star Contracting Company (Private) Limited", desc: "Architectural Lighting & Design", tag: "Design Excellence" },
@@ -276,9 +276,9 @@ function Hero() {
 
 function StatsStrip() {
   const items = [
-    { v: "175+", l: "Projects Delivered" },
+    { v: "500+", l: "Projects Delivered" },
     { v: "5", l: "Global Offices" },
-    { v: "205+", l: "Skilled Professionals" },
+    { v: "585+", l: "Skilled Professionals" },
     { v: "25+", l: "Years of Excellence" },
   ];
   return (
