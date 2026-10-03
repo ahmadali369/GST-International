@@ -78,7 +78,7 @@ export function Header() {
                 alt="GST Group logo"
                 width={485}
                 height={409}
-                className="h-10 w-auto object-contain drop-shadow-[0_0_18px_oklch(1_0_0/0.25)]"
+                className="header-logo h-10 w-auto object-contain drop-shadow-[0_0_18px_oklch(1_0_0/0.25)]"
               />
               <div className="leading-tight hidden sm:block">
                 <div className="font-display font-bold text-white text-sm tracking-wide">GST Group</div>
