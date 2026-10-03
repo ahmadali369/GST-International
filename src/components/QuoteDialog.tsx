@@ -21,7 +21,7 @@ export function QuoteDialog({ open, onOpenChange }: { open: boolean; onOpenChang
     ].join("\n");
 
     window.location.href = `mailto:sales@gstsaudi.com?subject=${encodeURIComponent("Quote request — GST Group")}&body=${encodeURIComponent(body)}`;
-    toast.success("Thanks! Your quote request is ready to send.");
+    toast.success("Opening your email app — please press send to deliver your quote request.");
     setSending(false);
     onOpenChange(false);
   };

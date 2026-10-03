@@ -29,8 +29,12 @@ export function Footer() {
               A multidisciplinary contracting powerhouse — transforming big designs into built realities across Saudi Arabia, Dubai, Pakistan & the UK — now expanding fast in the UAE.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              {[Linkedin, Facebook, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="w-9 h-9 grid place-items-center rounded-full glass hover:glow-ring transition">
+              {[
+                { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/gstsaudi" },
+                { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/gstsaudi" },
+                { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/gstsaudi" },
+              ].map(({ Icon, label, href }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-9 h-9 grid place-items-center rounded-full glass hover:glow-ring transition">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}

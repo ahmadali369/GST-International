@@ -55,7 +55,7 @@ export function QuoteRequestForm({
       "IT Services Quote Request — GST International"
     )}&body=${encodeURIComponent(body)}`;
 
-    toast.success("Your quote request is ready to send. Thank you!");
+    toast.success("Opening your email app — please press send to deliver your quote request.");
     clearCart();
     setSending(false);
     onOpenChange(false);

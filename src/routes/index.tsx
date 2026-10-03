@@ -145,9 +145,10 @@ function Hero() {
           </Tilt>
 
           <Tilt max={10} lift={6} className="mt-6">
-            <span className="inline-flex rounded-full glass px-5 py-2 text-[11px] font-medium uppercase tracking-[0.22em] text-white/85">
+            <h1 className="inline-flex rounded-full glass px-5 py-2 text-[11px] font-medium uppercase tracking-[0.22em] text-white/85">
+              <span className="sr-only">GST Group — Engineering &amp; Construction Powerhouse · </span>
               Group of Companies
-            </span>
+            </h1>
           </Tilt>
         </div>
 
