@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiInquiryRouteImport } from './routes/api/inquiry'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
@@ -56,6 +57,11 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiInquiryRoute = ApiInquiryRouteImport.update({
+  id: '/api/inquiry',
+  path: '/api/inquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRouteWithChildren
   '/api/chat': typeof ApiChatRoute
+  '/api/inquiry': typeof ApiInquiryRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/portfolio': typeof PortfolioRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/inquiry': typeof ApiInquiryRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/blog': typeof BlogIndexRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRouteWithChildren
   '/api/chat': typeof ApiChatRoute
+  '/api/inquiry': typeof ApiInquiryRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/blog/': typeof BlogIndexRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/services'
     | '/api/chat'
+    | '/api/inquiry'
     | '/blog/$slug'
     | '/services/$slug'
     | '/blog/'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/portfolio'
     | '/api/chat'
+    | '/api/inquiry'
     | '/blog/$slug'
     | '/services/$slug'
     | '/blog'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/services'
     | '/api/chat'
+    | '/api/inquiry'
     | '/blog/$slug'
     | '/services/$slug'
     | '/blog/'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRouteWithChildren
   ApiChatRoute: typeof ApiChatRoute
+  ApiInquiryRoute: typeof ApiInquiryRoute
   BlogSlugRoute: typeof BlogSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
@@ -220,6 +233,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/inquiry': {
+      id: '/api/inquiry'
+      path: '/api/inquiry'
+      fullPath: '/api/inquiry'
+      preLoaderRoute: typeof ApiInquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -273,6 +293,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRouteWithChildren,
   ApiChatRoute: ApiChatRoute,
+  ApiInquiryRoute: ApiInquiryRoute,
   BlogSlugRoute: BlogSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
 }

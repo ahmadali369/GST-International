@@ -5,6 +5,8 @@ import { PageHero, SectionEyebrow } from "@/components/Section";
 import { Tilt } from "@/components/Tilt";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import { InquiryThanks } from "@/components/InquiryThanks";
+import { submitInquiry, type InquiryResult } from "@/lib/inquiry";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -26,9 +28,10 @@ const OFFICES = [
 ];
 
 function Contact() {
-  const [sent, setSent] = useState(false);
+  const [result, setResult] = useState<InquiryResult | null>(null);
+  const [sending, setSending] = useState(false);
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const body = [
@@ -41,10 +44,14 @@ function Contact() {
       `Project details:`,
       `${data.get("details")}`,
     ].join("\n");
-    window.location.href = `mailto:sales@gstsaudi.com?subject=${encodeURIComponent(
-      "Project inquiry — GST Group",
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    setSending(true);
+    const outcome = await submitInquiry({
+      subject: "Project inquiry — GST Group",
+      body,
+      replyTo: String(data.get("email") ?? ""),
+    });
+    setSending(false);
+    setResult(outcome);
   };
   return (
     <div className="min-h-screen">
@@ -57,6 +64,11 @@ function Contact() {
 
       <section className="px-4 sm:px-6 lg:px-8 xl:px-10 pb-20">
         <div className="mx-auto max-w-[1536px] grid lg:grid-cols-5 gap-6">
+          {result ? (
+            <div className="lg:col-span-3 glass-strong rounded-3xl p-8 grid place-items-center">
+              <InquiryThanks result={result} dark />
+            </div>
+          ) : (
           <form
             onSubmit={submit}
             className="lg:col-span-3 glass-strong rounded-3xl p-8 space-y-5"
@@ -80,13 +92,11 @@ function Contact() {
                 placeholder="Scope, location, timeline..."
               />
             </div>
-            <button type="submit" className="btn-glass">
-              <span>{sent ? "Opening your email app ✓" : "Send message"}</span> {!sent && <Send className="w-4 h-4" />}
+            <button type="submit" disabled={sending} className="btn-glass disabled:opacity-60">
+              <span>{sending ? "Sending…" : "Send message"}</span> {!sending && <Send className="w-4 h-4" />}
             </button>
-            <p role="status" aria-live="polite" className="text-sm text-foreground/70 min-h-5">
-              {sent ? "Your email app should open with the message ready — press send to deliver it. No email app? Write to sales@gstsaudi.com." : ""}
-            </p>
           </form>
+          )}
 
           <aside className="lg:col-span-2 space-y-4">
             <Tilt max={6} className="glass-strong rounded-3xl p-7 space-y-4">

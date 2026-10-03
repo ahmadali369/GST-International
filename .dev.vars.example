@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local runs; set the same names as secrets in production.
+LOVABLE_API_KEY=
+RESEND_API_KEY=
+INQUIRY_TO=sales@gstsaudi.com
+INQUIRY_FROM=GST Website <onboarding@resend.dev>

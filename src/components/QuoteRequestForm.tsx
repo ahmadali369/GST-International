@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
-import { toast } from "sonner";
+import { InquiryThanks } from "@/components/InquiryThanks";
+import { submitInquiry, type InquiryResult } from "@/lib/inquiry";
 import { CheckCircle2, Send } from "lucide-react";
 import {
   Dialog,
@@ -23,8 +24,14 @@ export function QuoteRequestForm({
 }) {
   const { items, clearCart } = useCart();
   const [sending, setSending] = useState(false);
+  const [result, setResult] = useState<InquiryResult | null>(null);
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const close = (v: boolean) => {
+    onOpenChange(v);
+    if (!v) setTimeout(() => setResult(null), 200);
+  };
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSending(true);
 
@@ -51,18 +58,18 @@ export function QuoteRequestForm({
       `Timeline: ${data.get("timeline") || "Not specified"}`,
     ].join("\n");
 
-    window.location.href = `mailto:sales@gstsaudi.com?subject=${encodeURIComponent(
-      "IT Services Quote Request — GST International"
-    )}&body=${encodeURIComponent(body)}`;
-
-    toast.success("Opening your email app — please press send to deliver your quote request.");
+    const outcome = await submitInquiry({
+      subject: "IT Services Quote Request — GST International",
+      body,
+      replyTo: String(data.get("email") ?? ""),
+    });
     clearCart();
     setSending(false);
-    onOpenChange(false);
+    setResult(outcome);
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={close}>
       <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto border border-neutral-200/80 bg-white text-neutral-900 shadow-2xl shadow-black/20">
         <DialogHeader>
           <DialogTitle className="font-display text-xl text-neutral-950">
@@ -74,8 +81,10 @@ export function QuoteRequestForm({
           </DialogDescription>
         </DialogHeader>
 
+        {result && <InquiryThanks result={result} onClose={() => close(false)} />}
+
         {/* Selected services */}
-        {items.length > 0 && (
+        {!result && items.length > 0 && (
           <div className="rounded-xl border border-amber-200/60 bg-amber-50/40 p-4 space-y-2">
             <div className="text-xs font-bold uppercase tracking-[0.16em] text-amber-800">
               Selected Services ({items.length})
@@ -99,6 +108,7 @@ export function QuoteRequestForm({
           </div>
         )}
 
+        {!result && (
         <form onSubmit={submit} className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-1.5">
@@ -206,6 +216,7 @@ export function QuoteRequestForm({
             )}
           </Button>
         </form>
+        )}
       </DialogContent>
     </Dialog>
   );

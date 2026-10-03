@@ -1,6 +1,15 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource-variable/inter/wght.css";
+
+@font-face {
+  font-family: "Conthrax";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("./assets/fonts/conthrax-sb.woff") format("woff");
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -33,8 +42,8 @@
   --color-cyan-glow: var(--cyan-glow);
   --color-steel: var(--steel);
   --font-display: "Conthrax", "Space Grotesk", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-sans: "Inter", sans-serif;
+  --font-body: "Inter Variable", "Inter", sans-serif;
+  --font-sans: "Inter Variable", "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
 

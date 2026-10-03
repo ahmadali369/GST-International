@@ -32,7 +32,7 @@ export function CartDrawer({
             <div className="flex items-center justify-between">
               <SheetTitle className="font-display text-xl text-neutral-950 flex items-center gap-2.5">
                 <ShoppingCart className="w-5 h-5 text-amber-600" />
-                Selected Services
+                Your Quote List
                 {count > 0 && (
                   <span className="text-xs font-bold bg-amber-100 text-amber-800 rounded-full px-2.5 py-0.5">
                     {count}
@@ -41,7 +41,7 @@ export function CartDrawer({
               </SheetTitle>
             </div>
             <SheetDescription className="text-neutral-500 text-sm">
-              Review your selected IT services and request a custom quote.
+              Review the services you have selected and request a custom quote.
             </SheetDescription>
           </SheetHeader>
 
@@ -54,7 +54,7 @@ export function CartDrawer({
                 </div>
                 <p className="font-display text-lg text-neutral-400">Your cart is empty</p>
                 <p className="text-sm text-neutral-400 mt-1">
-                  Browse our IT services and add the ones you need.
+                  Add the services you are interested in and we will prepare a quote.
                 </p>
               </div>
             ) : (

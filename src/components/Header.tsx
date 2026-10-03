@@ -4,6 +4,7 @@ import { Menu, X, ShoppingCart } from "lucide-react";
 import logo from "@/assets/gst-logo.png";
 import { useCart } from "@/hooks/useCart";
 import { CartDrawer } from "@/components/CartDrawer";
+import { openQuote } from "@/lib/quote";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -100,11 +101,19 @@ export function Header() {
             </nav>
 
             <div className="flex items-center gap-2">
+              {/* Primary call to action */}
+              <button
+                type="button"
+                onClick={openQuote}
+                className="hidden sm:inline-flex items-center rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-sm transition hover:brightness-110 active:scale-[0.98]"
+              >
+                Get a Quote
+              </button>
               {/* Cart button */}
               <button
                 onClick={() => setCartOpen(true)}
                 className="relative p-2.5 rounded-lg glass hover:bg-white/10 transition-all duration-300 group"
-                aria-label={`Cart with ${cartCount} items`}
+                aria-label={`Quote list with ${cartCount} ${cartCount === 1 ? "item" : "items"}`}
               >
                 <ShoppingCart className="w-5 h-5 text-white/85 group-hover:text-white transition-colors" />
                 {cartCount > 0 && (
@@ -136,6 +145,16 @@ export function Header() {
                   </Link>
                 ))}
               </nav>
+              <button
+                type="button"
+                onClick={() => {
+                  setOpen(false);
+                  openQuote();
+                }}
+                className="mt-3 w-full rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground sm:hidden"
+              >
+                Get a Quote
+              </button>
             </div>
           )}
         </div>

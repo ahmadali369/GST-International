@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Facebook, Instagram, Linkedin, MessageCircleQuestionMark, Share2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { QuoteDialog } from "@/components/QuoteDialog";
+import { OPEN_QUOTE_EVENT } from "@/lib/quote";
 
 const FaqChat = lazy(() => import("@/components/FaqChat").then((m) => ({ default: m.FaqChat })));
 
@@ -25,6 +26,12 @@ export function FloatingActions() {
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
   }, [open]);
+
+  useEffect(() => {
+    const open = () => setQuoteOpen(true);
+    window.addEventListener(OPEN_QUOTE_EVENT, open);
+    return () => window.removeEventListener(OPEN_QUOTE_EVENT, open);
+  }, []);
 
   return (
     <>
@@ -54,9 +61,6 @@ export function FloatingActions() {
       </div>
 
       <div className="fixed bottom-5 right-4 z-[60] flex flex-col items-end gap-3 sm:bottom-7 sm:right-7">
-        <Button type="button" variant="outline" onClick={() => setQuoteOpen(true)} className="floating-quote h-9 rounded-full px-4 text-xs sm:h-11 sm:px-5 sm:text-sm">
-          Get a Quote
-        </Button>
         <Button asChild size="icon" className="whatsapp-button h-12 w-12 overflow-hidden rounded-2xl p-0 hover-3d sm:h-14 sm:w-14" aria-label="Chat with GST Group on WhatsApp">
           <a href="https://wa.me/966114509354" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7" aria-hidden="true">
