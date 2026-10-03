@@ -63,6 +63,9 @@ export function QuoteDialog({ open, onOpenChange }: { open: boolean; onOpenChang
               <Input
                 id="q-phone"
                 name="phone"
+                type="tel"
+                pattern="[+0-9\\s\\-()]{6,20}"
+                title="Enter a valid phone number"
                 placeholder="+966 …"
                 className="bg-white border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-neutral-900"
               />
@@ -73,6 +76,7 @@ export function QuoteDialog({ open, onOpenChange }: { open: boolean; onOpenChang
             <Textarea
               id="q-message"
               name="message"
+              required
               rows={3}
               placeholder="Scope, location, timeline…"
               className="bg-white border-neutral-300 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-900 focus:ring-neutral-900 resize-none"

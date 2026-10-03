@@ -121,7 +121,7 @@ function Hero() {
       <div
         aria-hidden
         className="pointer-events-none absolute top-28 sm:top-32 inset-x-0 text-center font-display font-extrabold uppercase select-none
-                   text-[8vw] leading-[0.95] tracking-[0.02em] text-white/[0.05]"
+                   text-[6.5vw] sm:text-[8vw] leading-[0.95] tracking-[0.02em] text-white/[0.05] overflow-hidden"
 
         style={{ transform: `translate3d(${tilt.x * 0.3}px,${-tilt.sy * 0.1}px,0)` }}
       >

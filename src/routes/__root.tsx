@@ -1,4 +1,6 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, redirect } from "@tanstack/react-router";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 import appCss from "../styles.css?url";
 import { FloatingActions } from "@/components/FloatingActions";
@@ -7,7 +9,9 @@ import { CartProvider } from "@/hooks/useCart";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="min-h-screen">
+    <Header />
+    <div className="flex min-h-[80vh] items-center justify-center bg-background px-4 pt-28">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
@@ -24,10 +28,19 @@ function NotFoundComponent() {
         </div>
       </div>
     </div>
+    <Footer />
+    </div>
   );
 }
 
 export const Route = createRootRoute({
+  // Canonicalise URLs: /ABOUT -> /about (avoids duplicate content).
+  beforeLoad: ({ location }) => {
+    const path = location.pathname;
+    if (path !== path.toLowerCase()) {
+      throw redirect({ href: path.toLowerCase() + location.searchStr + location.hash, statusCode: 301 });
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
