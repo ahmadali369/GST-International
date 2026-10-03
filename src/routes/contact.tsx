@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { PageHero, SectionEyebrow } from "@/components/Section";
 import { Tilt } from "@/components/Tilt";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -27,6 +27,25 @@ const OFFICES = [
 
 function Contact() {
   const [sent, setSent] = useState(false);
+
+  const submit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const body = [
+      `Name: ${data.get("name")}`,
+      `Company: ${data.get("company") || "Not provided"}`,
+      `Email: ${data.get("email")}`,
+      `Phone: ${data.get("phone") || "Not provided"}`,
+      `Project type: ${data.get("type") || "Not provided"}`,
+      ``,
+      `Project details:`,
+      `${data.get("details")}`,
+    ].join("\n");
+    window.location.href = `mailto:sales@gstsaudi.com?subject=${encodeURIComponent(
+      "Project inquiry — GST Group",
+    )}&body=${encodeURIComponent(body)}`;
+    setSent(true);
+  };
   return (
     <div className="min-h-screen">
       <Header />
@@ -39,7 +58,7 @@ function Contact() {
       <section className="px-4 sm:px-6 lg:px-8 xl:px-10 pb-20">
         <div className="mx-auto max-w-[1536px] grid lg:grid-cols-5 gap-6">
           <form
-            onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+            onSubmit={submit}
             className="lg:col-span-3 glass-strong rounded-3xl p-8 space-y-5"
           >
             <SectionEyebrow>Project Inquiry</SectionEyebrow>
@@ -54,15 +73,19 @@ function Contact() {
             <div>
               <label className="text-xs uppercase tracking-[0.2em] text-foreground/60">Project details</label>
               <textarea
+                name="details"
                 rows={5}
                 required
-                className="mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                className="mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
                 placeholder="Scope, location, timeline..."
               />
             </div>
             <button type="submit" className="btn-glass">
-              <span>{sent ? "Message sent ✓" : "Send message"}</span> {!sent && <Send className="w-4 h-4" />}
+              <span>{sent ? "Opening your email app ✓" : "Send message"}</span> {!sent && <Send className="w-4 h-4" />}
             </button>
+            <p role="status" aria-live="polite" className="text-sm text-foreground/70 min-h-5">
+              {sent ? "Your email app should open with the message ready — press send to deliver it. No email app? Write to sales@gstsaudi.com." : ""}
+            </p>
           </form>
 
           <aside className="lg:col-span-2 space-y-4">
@@ -89,7 +112,7 @@ function Contact() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {OFFICES.map((o) => (
               <Tilt key={o.city} className="glass rounded-2xl p-6 space-y-3">
-                <div className="text-[10px] uppercase tracking-[0.25em] text-primary">{o.country}</div>
+                <div className="text-xs uppercase tracking-[0.25em] text-primary">{o.country}</div>
                 <h3 className="font-display text-xl text-white">{o.city}</h3>
                 <div className="hairline" />
                 <a href={`tel:${o.phone}`} className="flex items-center gap-2 text-xs text-foreground/70 hover:text-white"><Phone className="w-3.5 h-3.5 text-primary" /> {o.phone}</a>
@@ -115,7 +138,7 @@ function Field({ label, name, type = "text", required, placeholder }: { label: s
         type={type}
         required={required}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/40"
+        className="mt-2 w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/40"
       />
     </div>
   );

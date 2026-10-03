@@ -34,7 +34,7 @@ export function CartDrawer({
                 <ShoppingCart className="w-5 h-5 text-amber-600" />
                 Selected Services
                 {count > 0 && (
-                  <span className="text-[11px] font-bold bg-amber-100 text-amber-800 rounded-full px-2.5 py-0.5">
+                  <span className="text-xs font-bold bg-amber-100 text-amber-800 rounded-full px-2.5 py-0.5">
                     {count}
                   </span>
                 )}
@@ -84,7 +84,7 @@ export function CartDrawer({
 
                     {/* Quantity controls */}
                     <div className="flex items-center gap-2 mt-3">
-                      <span className="text-[11px] uppercase tracking-wider text-neutral-400 font-medium">
+                      <span className="text-xs uppercase tracking-wider text-neutral-400 font-medium">
                         Qty
                       </span>
                       <div className="inline-flex items-center rounded-lg border border-neutral-200 bg-white">

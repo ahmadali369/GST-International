@@ -50,13 +50,21 @@ export function FaqChat({ onClose }: { onClose: () => void }) {
 
   useEffect(() => {
     if (status === "ready") {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      try {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      } catch {
+        /* storage unavailable or full — chat still works, just isn't saved */
+      }
     }
   }, [messages, status]);
 
+  // Focus the input once on open, and only where a physical keyboard is likely
+  // (avoids popping the on-screen keyboard and scrolling the page on phones).
   useEffect(() => {
-    containerRef.current?.querySelector("textarea")?.focus();
-  }, [status]);
+    if (window.matchMedia("(pointer: fine)").matches) {
+      containerRef.current?.querySelector("textarea")?.focus();
+    }
+  }, []);
 
   const handleSubmit = (message: { text?: string }) => {
     const text = message.text?.trim();
@@ -66,7 +74,11 @@ export function FaqChat({ onClose }: { onClose: () => void }) {
 
   const clearChat = () => {
     setMessages([]);
-    window.localStorage.removeItem(STORAGE_KEY);
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
   };
 
   return (
@@ -76,7 +88,7 @@ export function FaqChat({ onClose }: { onClose: () => void }) {
           <img src={logo} alt="GST Group" className="h-8 w-8 rounded-full object-contain" />
           <div className="leading-tight">
             <div className="font-display text-sm font-bold text-foreground">GST Assistant</div>
-            <div className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Quick answers, 24/7</div>
+            <div className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Quick answers, 24/7</div>
           </div>
         </div>
         <div className="flex items-center gap-1">

@@ -77,7 +77,7 @@ function Careers() {
                     </div>
                   </div>
                 </div>
-                <a href="mailto:careers@gstsaudi.com" className="btn-glass text-sm"><span>Apply</span> <ArrowRight className="w-4 h-4" /></a>
+                <a href={`mailto:careers@gstsaudi.com?subject=${encodeURIComponent(`Application: ${r.title} (${r.loc})`)}`} className="btn-glass text-sm"><span>Apply</span> <ArrowRight className="w-4 h-4" /></a>
               </Tilt>
             ))}
           </div>

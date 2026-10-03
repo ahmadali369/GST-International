@@ -25,7 +25,15 @@ export function Header() {
   const cartCount = getItemCount();
 
   useEffect(() => {
+    let frame = 0;
     const onScroll = () => {
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        measure();
+      });
+    };
+    const measure = () => {
       setScrolled(window.scrollY > 30);
 
       const header = headerRef.current;
@@ -40,14 +48,24 @@ export function Header() {
       header.style.pointerEvents = previousPointerEvents;
       setLightSurface(Boolean(point?.closest(".light-band")));
     };
-    onScroll();
+    measure();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      if (frame) cancelAnimationFrame(frame);
     };
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <>
@@ -60,11 +78,11 @@ export function Header() {
                 alt="GST Group logo"
                 width={485}
                 height={409}
-                className="h-10 w-auto object-contain drop-shadow-[0_0_18px_oklch(1_0_0/0.25)]"
+                className="header-logo h-10 w-auto object-contain drop-shadow-[0_0_18px_oklch(1_0_0/0.25)]"
               />
               <div className="leading-tight hidden sm:block">
                 <div className="font-display font-bold text-white text-sm tracking-wide">GST Group</div>
-                <div className="text-[9px] uppercase tracking-[0.12em] text-foreground/50 whitespace-nowrap">Saudi Arabia · Dubai · Pakistan · UK</div>
+                <div className="text-xs uppercase tracking-[0.12em] text-foreground/65 whitespace-nowrap">Saudi Arabia · Dubai · Pakistan · UK</div>
               </div>
             </Link>
 
@@ -85,12 +103,12 @@ export function Header() {
               {/* Cart button */}
               <button
                 onClick={() => setCartOpen(true)}
-                className="relative p-2 rounded-lg glass hover:bg-white/10 transition-all duration-300 group"
+                className="relative p-2.5 rounded-lg glass hover:bg-white/10 transition-all duration-300 group"
                 aria-label={`Cart with ${cartCount} items`}
               >
                 <ShoppingCart className="w-5 h-5 text-white/85 group-hover:text-white transition-colors" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold leading-none px-1 animate-rise">
+                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold leading-none px-1 animate-rise">
                     {cartCount}
                   </span>
                 )}
@@ -98,8 +116,10 @@ export function Header() {
 
               {/* Mobile menu button */}
               <button
-                className="lg:hidden p-2 rounded-lg glass"
+                className="lg:hidden p-2.5 rounded-lg glass"
                 aria-label="Menu"
+                aria-expanded={open}
+                aria-controls="mobile-nav"
                 onClick={() => setOpen((v) => !v)}
               >
                 {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -108,7 +128,7 @@ export function Header() {
           </div>
 
           {open && (
-            <div className="lg:hidden border-t border-white/10 px-4 pb-4 pt-2 animate-rise">
+            <div id="mobile-nav" className="lg:hidden border-t border-white/10 px-4 pb-4 pt-2 animate-rise">
               <nav className="flex flex-col gap-1">
                 {NAV.map((item) => (
                   <Link key={item.to} to={item.to} onClick={() => setOpen(false)} className="nav-link">

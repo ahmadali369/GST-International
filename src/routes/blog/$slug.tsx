@@ -43,7 +43,7 @@ function BlogPost() {
           <Link to="/blog" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-foreground/60 hover:text-white transition">
             <ArrowLeft className="w-3.5 h-3.5" /> All blogs
           </Link>
-          <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-white">
+          <span className="inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white">
             {post.category}
           </span>
           <h1 className="font-display text-3xl sm:text-5xl font-semibold text-metallic leading-[1.08]">{post.title}</h1>

@@ -88,6 +88,12 @@
 
   html { scroll-behavior: smooth; }
 
+  /* Desktop layout is designed to read like a browser at 80% zoom: render everything
+     (rem and px values alike) at 0.8 scale. Phones/tablets keep their normal size. */
+  @media (min-width: 1024px) {
+    html { zoom: 0.8; }
+  }
+
   body {
     background: var(--background);
     color: var(--foreground);
@@ -259,6 +265,9 @@
     box-shadow: 0 6px 20px oklch(0.2 0.012 75 / 0.08), inset 0 1px 0 oklch(1 0 0 / 0.7);
   }
   .light-header .glass { background: oklch(0.2 0.012 75 / 0.06); }
+  .header-logo { transition: filter 0.4s ease; }
+  /* The logo artwork is white; turn it dark when the header sits on a light section. */
+  .light-header .header-logo { filter: brightness(0) !important; }
 
   .social-drawer { display: flex; align-items: center; transform: translateX(calc(100% - 48px)); transition: transform 0.45s var(--transition-glass); }
   .social-drawer-open { transform: translateX(0); }
@@ -424,4 +433,40 @@
   border: 1px solid oklch(1 0 0 / 0.28) !important;
   backdrop-filter: blur(12px);
   box-shadow: 0 6px 18px oklch(0 0 0 / 0.35);
+}
+
+/* With the 0.8 zoom above, viewport-height units shrink by the same factor; scale
+   full-height sections back up so they still fill the screen. Unlayered so it wins. */
+@media (min-width: 1024px) {
+  .min-h-screen { min-height: 125vh; }
+  .min-h-\[100svh\] { min-height: 125svh; }
+  .min-h-\[80vh\] { min-height: 100vh; }
+}
+
+/* ---- UX polish ---- */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+::selection { background: color-mix(in oklab, var(--primary) 45%, transparent); color: inherit; }
+
+.skip-link {
+  position: fixed; left: 1rem; top: 0.75rem; z-index: 100;
+  padding: 0.6rem 1rem; border-radius: 0.6rem;
+  background: var(--primary); color: var(--primary-foreground);
+  font-size: 0.85rem; font-weight: 600;
+  transform: translateY(-200%); transition: transform 0.2s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

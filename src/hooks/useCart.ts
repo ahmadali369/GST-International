@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from "react";
 import { createElement } from "react";
 import { toast } from "sonner";
 
@@ -20,21 +20,46 @@ interface CartContextValue {
   isInCart: (id: string) => boolean;
 }
 
+const CART_STORAGE_KEY = "gst-cart";
+
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
+  const itemsRef = useRef<CartItem[]>(items);
+  const hydrated = useRef(false);
+
+  // Restore the cart after mount (not during render, to keep SSR and client markup identical).
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(CART_STORAGE_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      if (Array.isArray(parsed)) setItems(parsed as CartItem[]);
+    } catch {
+      /* storage unavailable or corrupt — start with an empty cart */
+    }
+    hydrated.current = true;
+  }, []);
+
+  useEffect(() => {
+    itemsRef.current = items;
+    if (!hydrated.current) return;
+    try {
+      window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+    } catch {
+      /* ignore quota / private-mode errors */
+    }
+  }, [items]);
 
   const addItem = useCallback((service: Omit<CartItem, "quantity">) => {
-    setItems((prev) => {
-      const existing = prev.find((item) => item.id === service.id);
-      if (existing) {
-        toast.info(`${service.name} is already in your cart`);
-        return prev;
-      }
-      toast.success(`${service.name} added to your cart`);
-      return [...prev, { ...service, quantity: 1 }];
-    });
+    if (itemsRef.current.some((item) => item.id === service.id)) {
+      toast.info(`${service.name} is already in your cart`);
+      return;
+    }
+    toast.success(`${service.name} added to your cart`);
+    setItems((prev) =>
+      prev.some((item) => item.id === service.id) ? prev : [...prev, { ...service, quantity: 1 }],
+    );
   }, []);
 
   const removeItem = useCallback((id: string) => {

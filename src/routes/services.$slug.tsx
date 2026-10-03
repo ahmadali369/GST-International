@@ -5,6 +5,7 @@ import { SectionEyebrow, SectionTitle } from "@/components/Section";
 import { Tilt } from "@/components/Tilt";
 import { SERVICES } from "@/data/services";
 import { ArrowRight, Check } from "lucide-react";
+import { ITServices } from "@/components/ITServices";
 
 export const Route = createFileRoute("/services/$slug")({
   head: ({ params }) => {
@@ -22,7 +23,9 @@ export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }) => {
     const s = SERVICES.find((x) => x.slug === params.slug);
     if (!s) throw notFound();
-    return s as (typeof SERVICES)[number];
+    // Return only serializable data — the service object holds a React icon component,
+    // which cannot be serialized for SSR/hydration (it blanked the page on direct load).
+    return { slug: s.slug };
   },
   component: ServiceDetail,
   notFoundComponent: () => (
@@ -64,7 +67,7 @@ function ServiceDetail() {
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full bg-primary/15 blur-3xl" />
         <div className="relative mx-auto max-w-[1536px] grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7 space-y-5 animate-rise">
-            <SectionEyebrow>Service · {s.slug}</SectionEyebrow>
+            <SectionEyebrow>Specialized Service</SectionEyebrow>
             <h1 className="font-display text-5xl lg:text-6xl text-metallic">{s.title}</h1>
             <p className="text-foreground/75 text-lg max-w-xl">{s.desc}</p>
             <div className="flex gap-3">
@@ -95,6 +98,8 @@ function ServiceDetail() {
           </div>
         </div>
       </section>
+
+      {s.slug === "it-services" && <ITServices />}
 
       <section className="px-4 sm:px-6 lg:px-8 xl:px-10 py-20">
         <div className="mx-auto max-w-[1536px] grid md:grid-cols-3 gap-4">

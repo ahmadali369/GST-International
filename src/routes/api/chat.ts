@@ -26,7 +26,13 @@ export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const { messages } = (await request.json()) as ChatRequestBody;
+        let body: ChatRequestBody;
+        try {
+          body = (await request.json()) as ChatRequestBody;
+        } catch {
+          return new Response("Invalid JSON body", { status: 400 });
+        }
+        const { messages } = body ?? {};
         if (!Array.isArray(messages)) {
           return new Response("Messages are required", { status: 400 });
         }
