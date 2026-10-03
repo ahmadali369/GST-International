@@ -136,7 +136,7 @@ export function OdooFeatureEcosystem() {
                       </span>
                     </div>
 
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#714B67] bg-[#714B67]/8 border border-[#714B67]/15 rounded-md px-2 py-0.5">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#714B67] bg-[#714B67]/8 border border-[#714B67]/15 rounded-md px-2 py-0.5">
                       {feat.badge}
                     </span>
                   </div>

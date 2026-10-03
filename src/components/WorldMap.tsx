@@ -41,9 +41,9 @@ export function WorldMap() {
             <span className="relative block h-3 w-3 rounded-full bg-primary ring-4 ring-primary/20 transition-transform duration-300 group-hover:scale-150" />
             <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-6 whitespace-nowrap rounded-xl glass px-3 py-1.5 opacity-0 translate-y-2 scale-95 group-hover:opacity-100 group-hover:translate-y-0 group-hover:scale-100 transition duration-300">
               <div className="text-xs font-display text-foreground">{m.country}</div>
-              <div className="text-[10px] text-foreground/70">{m.city}</div>
+              <div className="text-xs text-foreground/70">{m.city}</div>
             </div>
-            <span className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 text-[9px] uppercase tracking-[0.2em] text-primary">
+            <span className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 text-xs uppercase tracking-[0.2em] text-primary">
               {m.code}
             </span>
           </div>

@@ -442,3 +442,31 @@
   .min-h-\[100svh\] { min-height: 125svh; }
   .min-h-\[80vh\] { min-height: 100vh; }
 }
+
+/* ---- UX polish ---- */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 0.5rem;
+}
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+::selection { background: color-mix(in oklab, var(--primary) 45%, transparent); color: inherit; }
+
+.skip-link {
+  position: fixed; left: 1rem; top: 0.75rem; z-index: 100;
+  padding: 0.6rem 1rem; border-radius: 0.6rem;
+  background: var(--primary); color: var(--primary-foreground);
+  font-size: 0.85rem; font-weight: 600;
+  transform: translateY(-200%); transition: transform 0.2s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

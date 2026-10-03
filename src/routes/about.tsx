@@ -145,7 +145,7 @@ function About() {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/35 to-transparent" />
                 <div className="absolute bottom-4 left-5 right-5">
                   <div className="font-display text-lg text-foreground leading-tight">{l.name}</div>
-                  <div className="text-[11px] text-primary uppercase tracking-[0.18em] mt-1">{l.role}</div>
+                  <div className="text-xs text-primary uppercase tracking-[0.18em] mt-1">{l.role}</div>
                 </div>
               </div>
               <div className="p-7 pt-6 flex-1 flex flex-col gap-4 border-t border-white/10">

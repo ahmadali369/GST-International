@@ -31,7 +31,7 @@ export function FloatingActions() {
       <div ref={drawerRef} className="fixed right-0 top-28 z-[60] flex items-center">
         <div className={`social-panel ${open ? "social-panel-open" : ""}`}>
           <div className="social-panel-inner">
-            <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Follow GST Group</div>
+            <div className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Follow GST Group</div>
             <div className="flex gap-2">
               {SOCIALS.map(({ label, href, Icon }) => (
                 <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={label} className="social-icon" tabIndex={open ? 0 : -1}>

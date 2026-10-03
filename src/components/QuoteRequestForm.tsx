@@ -77,7 +77,7 @@ export function QuoteRequestForm({
         {/* Selected services */}
         {items.length > 0 && (
           <div className="rounded-xl border border-amber-200/60 bg-amber-50/40 p-4 space-y-2">
-            <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-amber-800">
+            <div className="text-xs font-bold uppercase tracking-[0.16em] text-amber-800">
               Selected Services ({items.length})
             </div>
             <div className="space-y-1">
@@ -89,7 +89,7 @@ export function QuoteRequestForm({
                   <CheckCircle2 className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                   <span>{item.name}</span>
                   {item.quantity > 1 && (
-                    <span className="text-[11px] text-amber-700 bg-amber-100 rounded px-1.5 py-0.5 font-medium">
+                    <span className="text-xs text-amber-700 bg-amber-100 rounded px-1.5 py-0.5 font-medium">
                       ×{item.quantity}
                     </span>
                   )}

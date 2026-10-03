@@ -124,7 +124,7 @@ export function ITServices() {
                   className="rounded-full px-6 py-2.5 text-sm font-medium text-neutral-500 data-[state=active]:bg-white data-[state=active]:text-neutral-900 data-[state=active]:shadow-sm transition-all"
                 >
                   {cat.label}
-                  <span className="ml-2 text-[10px] font-bold bg-neutral-200/80 data-[state=active]:bg-amber-100 data-[state=active]:text-amber-800 text-neutral-400 rounded-full px-2 py-0.5">
+                  <span className="ml-2 text-xs font-bold bg-neutral-200/80 data-[state=active]:bg-amber-100 data-[state=active]:text-amber-800 text-neutral-400 rounded-full px-2 py-0.5">
                     {cat.id === "odoo" ? odooServices.length : itServices.length}
                   </span>
                 </TabsTrigger>

@@ -145,7 +145,7 @@ function Hero() {
           </Tilt>
 
           <Tilt max={10} lift={6} className="mt-6">
-            <h1 className="inline-flex rounded-full glass px-5 py-2 text-[11px] font-medium uppercase tracking-[0.22em] text-white/85">
+            <h1 className="inline-flex rounded-full glass px-5 py-2 text-xs font-medium uppercase tracking-[0.22em] text-white/85">
               <span className="sr-only">GST Group — Engineering &amp; Construction Powerhouse · </span>
               Group of Companies
             </h1>
@@ -199,7 +199,7 @@ function Hero() {
                 <p className="mt-3 text-[13px] leading-snug text-foreground/70 tilt-layer-sm">{c.desc}</p>
                 <div className="hairline mt-auto mb-3" />
                 <div className="flex items-center justify-between text-xs tilt-layer-sm">
-                  <span className="flex items-center gap-1.5 text-[11px] text-foreground/60"><ShieldCheck className="w-3.5 h-3.5 shrink-0" />{c.tag}</span>
+                  <span className="flex items-center gap-1.5 text-xs text-foreground/60"><ShieldCheck className="w-3.5 h-3.5 shrink-0" />{c.tag}</span>
                   <Link to="/services" className="text-white/90 font-medium hover:text-white">Details</Link>
                 </div>
               </div>
@@ -239,7 +239,7 @@ function Hero() {
                 <p className="mt-3 text-[13px] leading-snug text-foreground/70 tilt-layer-sm">{c.desc}</p>
                 <div className="hairline mt-auto mb-3" />
                 <div className="flex items-center justify-between text-xs tilt-layer-sm">
-                  <span className="flex items-center gap-1.5 text-[11px] text-foreground/60"><ShieldCheck className="w-3.5 h-3.5 shrink-0" />{c.tag}</span>
+                  <span className="flex items-center gap-1.5 text-xs text-foreground/60"><ShieldCheck className="w-3.5 h-3.5 shrink-0" />{c.tag}</span>
                   <Link to="/services" className="text-white/90 font-medium hover:text-white">Details</Link>
                 </div>
               </div>
@@ -341,7 +341,7 @@ function DubaiSpotlight() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
                 <div className="absolute bottom-4 left-4 tilt-layer">
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-primary">Dubai · UAE</div>
+                  <div className="text-xs uppercase tracking-[0.25em] text-primary">Dubai · UAE</div>
                   <div className="font-display text-white">{g.label}</div>
                 </div>
               </div>
@@ -420,7 +420,7 @@ function Projects() {
                   <div className="absolute inset-0 img-scrim" />
                 </div>
                 <div className="on-dark absolute inset-0 p-5 flex flex-col justify-end tilt-layer">
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-primary">{p.loc}</div>
+                  <div className="text-xs uppercase tracking-[0.25em] text-primary">{p.loc}</div>
                   <h3 className="font-display text-lg text-white mt-1">{p.name}</h3>
                   <p className="text-xs text-foreground/70 mt-2 line-clamp-2">{p.scope}</p>
                 </div>
@@ -601,7 +601,7 @@ function GlobalPresence() {
                 <img src={o.img} alt={`${o.city} office`} loading="lazy" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" />
                 <div className="absolute inset-0 img-scrim" />
                 <div className="on-dark absolute inset-x-0 bottom-0 p-5 tilt-layer">
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-primary flex items-center gap-1.5">
+                  <div className="text-xs uppercase tracking-[0.25em] text-primary flex items-center gap-1.5">
                     <MapPin className="w-3 h-3" /> {o.tag}
                   </div>
                   <div className="font-display text-xl text-white mt-1">{o.city}</div>
@@ -751,10 +751,10 @@ function LatestInsights() {
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/25 to-transparent" />
                 </div>
                 <div className="p-6 space-y-2 tilt-layer-sm">
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-primary">{p.category}</div>
+                  <div className="text-xs uppercase tracking-[0.25em] text-primary">{p.category}</div>
                   <div className="font-display text-base text-white leading-snug">{p.title}</div>
                   <p className="text-sm text-foreground/60 line-clamp-2">{p.excerpt}</p>
-                  <div className="text-xs text-foreground/40 pt-1">{p.date} · {p.readTime}</div>
+                  <div className="text-xs text-foreground/60 pt-1">{p.date} · {p.readTime}</div>
                 </div>
               </Link>
             </Tilt>

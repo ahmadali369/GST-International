@@ -82,7 +82,7 @@ export function Header() {
               />
               <div className="leading-tight hidden sm:block">
                 <div className="font-display font-bold text-white text-sm tracking-wide">GST Group</div>
-                <div className="text-[9px] uppercase tracking-[0.12em] text-foreground/50 whitespace-nowrap">Saudi Arabia · Dubai · Pakistan · UK</div>
+                <div className="text-xs uppercase tracking-[0.12em] text-foreground/65 whitespace-nowrap">Saudi Arabia · Dubai · Pakistan · UK</div>
               </div>
             </Link>
 
@@ -103,12 +103,12 @@ export function Header() {
               {/* Cart button */}
               <button
                 onClick={() => setCartOpen(true)}
-                className="relative p-2 rounded-lg glass hover:bg-white/10 transition-all duration-300 group"
+                className="relative p-2.5 rounded-lg glass hover:bg-white/10 transition-all duration-300 group"
                 aria-label={`Cart with ${cartCount} items`}
               >
                 <ShoppingCart className="w-5 h-5 text-white/85 group-hover:text-white transition-colors" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center rounded-full bg-primary text-primary-foreground text-[10px] font-bold leading-none px-1 animate-rise">
+                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] flex items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold leading-none px-1 animate-rise">
                     {cartCount}
                   </span>
                 )}
@@ -116,7 +116,7 @@ export function Header() {
 
               {/* Mobile menu button */}
               <button
-                className="lg:hidden p-2 rounded-lg glass"
+                className="lg:hidden p-2.5 rounded-lg glass"
                 aria-label="Menu"
                 aria-expanded={open}
                 aria-controls="mobile-nav"

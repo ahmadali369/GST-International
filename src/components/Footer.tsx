@@ -22,7 +22,7 @@ export function Footer() {
               <img src={logo} alt="GST Group logo" width={485} height={409} className="h-14 w-auto object-contain" />
               <div>
                 <div className="font-display font-bold text-white">GST Group</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-foreground/50">Build · Engineer · Deliver</div>
+                <div className="text-xs uppercase tracking-[0.2em] text-foreground/65">Build · Engineer · Deliver</div>
               </div>
             </Link>
             <p className="text-sm text-foreground/70 max-w-sm">
@@ -75,7 +75,7 @@ export function Footer() {
             {OFFICES.map((o) => (
               <div key={o.city} className="glass rounded-xl p-4 flex items-center justify-between hover-3d">
                 <div>
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-primary">{o.tag ?? "Office"}</div>
+                  <div className="text-xs uppercase tracking-[0.2em] text-primary">{o.tag ?? "Office"}</div>
                   <div className="text-white font-display font-semibold">{o.city}</div>
                   <div className="text-xs text-foreground/60">{o.country}</div>
                 </div>
@@ -88,7 +88,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/5">
-          <div className="mx-auto max-w-[1536px] px-4 sm:px-6 lg:px-8 xl:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-foreground/50">
+          <div className="mx-auto max-w-[1536px] px-4 sm:px-6 lg:px-8 xl:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-foreground/65">
             <div>© {new Date().getFullYear()} GST Group. All rights reserved.</div>
             <div>ISO 9001 · 14001 · 45001 Certified</div>
           </div>

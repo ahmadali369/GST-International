@@ -47,9 +47,9 @@ function Portfolio() {
                   <img src={p.img} alt={p.name} loading="lazy" className="w-full h-full object-cover opacity-85 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent" />
                 </div>
-                <div className="absolute top-4 left-4 glass rounded-full text-[10px] uppercase tracking-[0.2em] px-3 py-1 text-primary tilt-layer-sm">{p.tag}</div>
+                <div className="absolute top-4 left-4 glass rounded-full text-xs uppercase tracking-[0.2em] px-3 py-1 text-primary tilt-layer-sm">{p.tag}</div>
                 <div className="absolute inset-x-0 bottom-0 p-5 space-y-1 tilt-layer">
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-primary">{p.loc}</div>
+                  <div className="text-xs uppercase tracking-[0.25em] text-primary">{p.loc}</div>
                   <h3 className="font-display text-lg text-white">{p.name}</h3>
                   <p className="text-xs text-foreground/70">{p.scope}</p>
                 </div>

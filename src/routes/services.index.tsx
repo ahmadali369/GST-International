@@ -52,7 +52,7 @@ function ServicesIndex() {
                 <div className="p-6 space-y-3 tilt-layer-sm">
                   <div className="flex items-start justify-between gap-3">
                     <h3 className="font-display text-xl text-white">{s.title}</h3>
-                    <ArrowRight className="w-4 h-4 mt-1.5 shrink-0 text-foreground/40 group-hover:text-white group-hover:translate-x-1 transition" />
+                    <ArrowRight className="w-4 h-4 mt-1.5 shrink-0 text-foreground/60 group-hover:text-white group-hover:translate-x-1 transition" />
                   </div>
                   <p className="text-sm text-foreground/65 leading-relaxed">{s.desc}</p>
                   <div className="pt-1 text-xs text-primary opacity-0 group-hover:opacity-100 transition flex items-center gap-1">

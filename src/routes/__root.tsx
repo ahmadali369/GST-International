@@ -90,7 +90,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <CartProvider>
-      <Outlet />
+      <a href="#main" className="skip-link">Skip to content</a>
+      <main id="main" tabIndex={-1} className="outline-none">
+        <Outlet />
+      </main>
       <FloatingActions />
       <Toaster position="top-center" />
     </CartProvider>

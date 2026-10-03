@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export function SectionEyebrow({ children }: { children: ReactNode }) {
   return (
-    <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.3em] text-primary/90">
+    <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-primary/90">
       <span className="w-8 h-px bg-primary/50" />
       {children}
     </div>

@@ -88,7 +88,7 @@ export function FaqChat({ onClose }: { onClose: () => void }) {
           <img src={logo} alt="GST Group" className="h-8 w-8 rounded-full object-contain" />
           <div className="leading-tight">
             <div className="font-display text-sm font-bold text-foreground">GST Assistant</div>
-            <div className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">Quick answers, 24/7</div>
+            <div className="text-xs uppercase tracking-[0.14em] text-muted-foreground">Quick answers, 24/7</div>
           </div>
         </div>
         <div className="flex items-center gap-1">
