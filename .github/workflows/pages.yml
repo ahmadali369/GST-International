@@ -18,11 +18,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - run: npm ci
       - name: Build static site
         env:
@@ -33,7 +36,7 @@ jobs:
           npx vite build
           cp dist/client/index.html dist/client/404.html
           touch dist/client/.nojekyll
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: dist/client
 
