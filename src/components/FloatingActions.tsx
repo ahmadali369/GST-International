@@ -70,6 +70,8 @@ export function FloatingActions() {
         </Button>
       </div>
 
+      {/* The chat needs the server API, which a static (GitHub Pages) build does not have. */}
+      {!import.meta.env.VITE_STATIC_SITE && (
       <div className="fixed bottom-5 left-4 z-[60] flex flex-col items-start gap-3 sm:bottom-7 sm:left-7">
         {faqOpen && (
           <div className="h-[480px] w-[calc(100vw-2rem)] max-w-sm animate-rise">
@@ -89,6 +91,7 @@ export function FloatingActions() {
           {faqOpen ? <X className="h-5 w-5" /> : <MessageCircleQuestionMark className="h-5 w-5" />}
         </Button>
       </div>
+      )}
 
       <QuoteDialog open={quoteOpen} onOpenChange={setQuoteOpen} />
     </>
