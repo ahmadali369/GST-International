@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
-import { toast } from "sonner";
+import { InquiryThanks } from "@/components/InquiryThanks";
+import { submitInquiry, type InquiryResult } from "@/lib/inquiry";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +10,14 @@ import { Label } from "@/components/ui/label";
 export function QuoteDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
   const [sending, setSending] = useState(false);
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const [result, setResult] = useState<InquiryResult | null>(null);
+
+  const close = (v: boolean) => {
+    onOpenChange(v);
+    if (!v) setTimeout(() => setResult(null), 200);
+  };
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSending(true);
     const data = new FormData(event.currentTarget);
@@ -20,14 +28,17 @@ export function QuoteDialog({ open, onOpenChange }: { open: boolean; onOpenChang
       `Project: ${data.get("message")}`,
     ].join("\n");
 
-    window.location.href = `mailto:sales@gstsaudi.com?subject=${encodeURIComponent("Quote request — GST Group")}&body=${encodeURIComponent(body)}`;
-    toast.success("Opening your email app — please press send to deliver your quote request.");
+    const outcome = await submitInquiry({
+      subject: "Quote request — GST Group",
+      body,
+      replyTo: String(data.get("email") ?? ""),
+    });
     setSending(false);
-    onOpenChange(false);
+    setResult(outcome);
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={close}>
       <DialogContent className="sm:max-w-md border border-neutral-200/80 bg-white text-neutral-900 shadow-2xl shadow-black/20">
         <DialogHeader>
           <DialogTitle className="font-display text-xl text-neutral-950">Request a Quote</DialogTitle>
@@ -35,6 +46,9 @@ export function QuoteDialog({ open, onOpenChange }: { open: boolean; onOpenChang
             Tell us about your project — our engineers reply within one business day.
           </DialogDescription>
         </DialogHeader>
+        {result ? (
+          <InquiryThanks result={result} onClose={() => close(false)} />
+        ) : (
         <form onSubmit={submit} className="space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="q-name" className="text-neutral-700">Full name</Label>
@@ -90,6 +104,7 @@ export function QuoteDialog({ open, onOpenChange }: { open: boolean; onOpenChang
             {sending ? "Sending…" : "Send request"}
           </Button>
         </form>
+        )}
       </DialogContent>
     </Dialog>
   );

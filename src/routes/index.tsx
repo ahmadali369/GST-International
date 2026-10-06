@@ -12,6 +12,8 @@ import { SectionEyebrow, SectionTitle } from "@/components/Section";
 import { Tilt } from "@/components/Tilt";
 import { SERVICES } from "@/data/services";
 import { POSTS } from "@/data/blog";
+import { STATS } from "@/data/stats";
+import { openQuote } from "@/lib/quote";
 import { ITServices } from "@/components/ITServices";
 import { OdooFeatureEcosystem } from "@/components/OdooFeatureEcosystem";
 
@@ -62,7 +64,6 @@ function Home() {
       <Projects />
       <Industries />
       <Process />
-      <Approach />
       <WhyUs />
       <OdooFeatureEcosystem />
       <Certifications />
@@ -133,7 +134,7 @@ function Hero() {
         {/* Central hub */}
         <div className="relative flex flex-col items-center">
           <Tilt max={14} lift={14} style={{ transform: `translate3d(${tilt.x * 0.4}px,${tilt.y * 0.4}px,0)` }}>
-            <div className="relative w-[200px] h-[200px] sm:w-[215px] sm:h-[215px] rounded-full glass shine-sweep flex items-center justify-center animate-float">
+            <div className="relative w-[200px] h-[200px] sm:w-[215px] sm:h-[215px] rounded-full glass shine-sweep flex items-center justify-center">
               <img
                 src={logoFull}
                 alt="GST Group"
@@ -250,19 +251,19 @@ function Hero() {
 
         {/* Primary CTAs */}
         <div className="mt-12 flex flex-wrap justify-center gap-3">
-          <Link to="/services" className="btn-glass hover-3d">
-            <span>Explore Services</span> <ArrowRight className="w-4 h-4" />
-          </Link>
-          <Link to="/portfolio" className="btn-glass hover-3d">
-            <span>View Portfolio</span>
+          <button type="button" onClick={openQuote} className="btn-glass hover-3d">
+            <span>Get a Quote</span> <ArrowRight className="w-4 h-4" />
+          </button>
+          <Link to="/portfolio" className="inline-flex items-center gap-1.5 px-4 py-3 text-sm text-foreground/75 transition hover:text-white">
+            View our work <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-foreground/55">
           {[
             { Icon: Award, label: "ISO 9001 · 14001 · 45001" },
-            { Icon: Clock, label: "25+ years of excellence" },
-            { Icon: Globe2, label: "5 global offices" },
+            { Icon: Clock, label: `${STATS.years} years of excellence` },
+            { Icon: Globe2, label: `${STATS.offices} global offices` },
           ].map(({ Icon, label }) => (
             <div key={label} className="hover-3d rounded-full glass px-4 py-2 flex items-center gap-2">
               <Icon className="w-4 h-4 text-primary" /> {label}
@@ -278,10 +279,10 @@ function Hero() {
 
 function StatsStrip() {
   const items = [
-    { v: "500+", l: "Projects Delivered" },
-    { v: "5", l: "Global Offices" },
-    { v: "585+", l: "Skilled Professionals" },
-    { v: "25+", l: "Years of Excellence" },
+    { v: STATS.projects, l: "Projects Delivered" },
+    { v: STATS.offices, l: "Global Offices" },
+    { v: STATS.professionals, l: "Skilled Professionals" },
+    { v: STATS.years, l: "Years of Excellence" },
   ];
   return (
     <section className="relative -mt-8 px-4 sm:px-6 lg:px-8 xl:px-10 z-10">
@@ -332,7 +333,7 @@ function DubaiSpotlight() {
         <div className="lg:col-span-7 grid grid-cols-2 gap-4">
           {DUBAI_GALLERY.map((g, i) => (
             <Tilt key={g.label} max={12} className={`rounded-2xl glass overflow-hidden ${i % 2 ? "mt-8" : ""}`}>
-              <div className="relative aspect-[4/5] shine-sweep">
+              <div className="relative aspect-[4/5]">
                 <img
                   src={g.img}
                   alt={`${g.label}, Dubai`}
@@ -463,42 +464,6 @@ function Process() {
                 </div>
                 <h3 className="font-display text-lg text-white">{s.t}</h3>
                 <p className="text-sm text-foreground/65 leading-relaxed">{s.d}</p>
-              </div>
-            </Tilt>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Approach() {
-  const items = [
-    { icon: Sparkles, title: "Integrated Solutions", desc: "Seamless coordination from concept to completion across every discipline." },
-    { icon: ShieldCheck, title: "ISO Certified Quality", desc: "ISO 9001-2015, 14001-2015 & 45001-2018 certified processes." },
-    { icon: Clock, title: "On-Time Excellence", desc: "Reliable delivery aligned to international standards of safety & quality." },
-    { icon: Users, title: "Expert Workforce", desc: "Engineers, professionals and craftsmen focused on client satisfaction." },
-  ];
-  return (
-    <section className="relative py-24 sm:py-32 px-4 sm:px-6 lg:px-8 xl:px-10">
-      <div className="mx-auto max-w-[1536px] grid lg:grid-cols-2 gap-16 items-center">
-        <div className="space-y-6">
-          <SectionEyebrow>Why GST</SectionEyebrow>
-          <SectionTitle>Engineered for trust.<br />Built to endure.</SectionTitle>
-          <p className="text-foreground/70 max-w-lg">
-            Established in 2000, GST Group has grown into one of the region's most trusted names in construction and engineering — delivering excellence across the Kingdom, the Emirates and beyond.
-          </p>
-          <Link to="/about" className="btn-glass"><span>About the Company</span> <ArrowRight className="w-4 h-4" /></Link>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {items.map((it) => (
-            <Tilt key={it.title} className="glass rounded-2xl">
-              <div className="p-6 space-y-3 h-full">
-                <div className="w-10 h-10 rounded-xl bg-primary/15 grid place-items-center text-primary border border-primary/20 tilt-layer-sm">
-                  <it.icon className="w-5 h-5" />
-                </div>
-                <h3 className="font-display text-white">{it.title}</h3>
-                <p className="text-sm text-foreground/65">{it.desc}</p>
               </div>
             </Tilt>
           ))}
@@ -652,7 +617,7 @@ function CTA() {
             <p className="text-foreground/70 max-w-xl mx-auto">Talk to our engineers about your next milestone — design, build or fitout — in Riyadh, Dubai, Lahore or London.</p>
             <div className="flex justify-center gap-3 flex-wrap">
               <Link to="/contact" className="btn-glass"><span>Start a Project</span> <ArrowRight className="w-4 h-4" /></Link>
-              <a href="mailto:sales@gstsaudi.com" className="btn-glass"><span>sales@gstsaudi.com</span></a>
+              <a href="mailto:sales@gstsaudi.com" className="inline-flex items-center px-4 py-3 text-sm text-foreground/75 transition hover:text-white">sales@gstsaudi.com</a>
             </div>
           </div>
         </div>
@@ -700,7 +665,7 @@ const WHY = [
   { icon: ShieldCheck, t: "HSE First", d: "Zero-harm culture with documented method statements and daily toolbox talks on every site." },
   { icon: Factory, t: "In-house Fabrication", d: "Our own metal and glass workshops keep quality, cost and delivery under one roof." },
   { icon: Clock, t: "On-time Delivery", d: "Programme-driven planning with weekly look-aheads and transparent client reporting." },
-  { icon: Users, t: "1000+ Specialists", d: "Engineers, fabricators, MEP technicians and project managers across four countries." },
+  { icon: Users, t: `${STATS.professionals} Specialists`, d: "Engineers, fabricators, MEP technicians and project managers across four countries." },
 ];
 
 function WhyUs() {

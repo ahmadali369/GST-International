@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageHero, SectionEyebrow, SectionTitle } from "@/components/Section";
 import { Tilt } from "@/components/Tilt";
+import { STATS } from "@/data/stats";
 import { ArrowRight, Briefcase, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/careers")({
@@ -41,9 +42,9 @@ function Careers() {
       <section className="px-4 sm:px-6 lg:px-8 xl:px-10 pb-20">
         <div className="mx-auto max-w-[1536px] grid sm:grid-cols-3 gap-4">
           {[
-            { v: "205+", l: "Skilled Professionals" },
-            { v: "5", l: "Global Offices" },
-            { v: "25+", l: "Years of Excellence" },
+            { v: STATS.professionals, l: "Skilled Professionals" },
+            { v: STATS.offices, l: "Global Offices" },
+            { v: STATS.years, l: "Years of Excellence" },
           ].map((it) => (
             <Tilt key={it.l} className="glass rounded-2xl">
               <div className="p-6 text-center">
