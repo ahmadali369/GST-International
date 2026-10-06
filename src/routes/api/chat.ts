@@ -1,4 +1,4 @@
-import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { getChatModel } from "@/lib/chat-provider.server";
 import { createFileRoute } from "@tanstack/react-router";
 import { corsHeaders, preflight, withCors } from "@/lib/cors.server";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
@@ -43,14 +43,13 @@ export const Route = createFileRoute("/api/chat")({
           return withCors(request, new Response("Conversation too long", { status: 413 }));
         }
 
-        const key = process.env["LOVABLE_API_KEY"];
-        if (!key) {
-          return withCors(request, new Response("Missing LOVABLE_API_KEY", { status: 500 }));
+        const model = getChatModel();
+        if (!model) {
+          return withCors(request, new Response("Chat is not configured (missing CHAT_API_KEY)", { status: 503 }));
         }
 
-        const gateway = createLovableAiGatewayProvider(key);
         const result = streamText({
-          model: gateway("google/gemini-3.7-flash"),
+          model,
           system: SYSTEM_PROMPT,
           messages: await convertToModelMessages(messages as UIMessage[]),
         });

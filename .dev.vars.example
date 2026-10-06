@@ -1,5 +1,8 @@
 # Copy to .dev.vars for local runs; set the same names as secrets in production.
-LOVABLE_API_KEY=
+# FAQ chat: any OpenAI-compatible provider. Defaults to Google Gemini (free key: https://aistudio.google.com/apikey)
+CHAT_API_KEY=
+# CHAT_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
+# CHAT_MODEL=gemini-2.5-flash
 RESEND_API_KEY=
 INQUIRY_TO=sales@gstsaudi.com
 # Comma-separated extra origins allowed to call the API (the GitHub Pages site is allowed by default)
