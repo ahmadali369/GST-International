@@ -1,5 +1,7 @@
 export type InquiryResult = "sent" | "mailto";
 
+import { apiUrl } from "@/lib/api";
+
 const SALES_EMAIL = "sales@gstsaudi.com";
 
 /**
@@ -13,7 +15,7 @@ export async function submitInquiry(input: {
   replyTo?: string;
 }): Promise<InquiryResult> {
   try {
-    const res = await fetch("/api/inquiry", {
+    const res = await fetch(apiUrl("/api/inquiry"), {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(input),

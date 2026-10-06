@@ -29,6 +29,9 @@ jobs:
         env:
           GITHUB_PAGES: "1"
           VITE_STATIC_SITE: "1"
+          # Set the repo variable API_BASE (Settings > Secrets and variables > Actions > Variables)
+          # to your deployed Worker URL to enable the chat and server-side form delivery.
+          VITE_API_BASE: ${{ vars.API_BASE }}
           NODE_OPTIONS: --max-old-space-size=8192
         run: |
           npx vite build

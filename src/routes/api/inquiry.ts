@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { preflight, withCors } from "@/lib/cors.server";
 
 type Body = { subject?: unknown; body?: unknown; replyTo?: unknown };
 
@@ -7,7 +8,13 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const Route = createFileRoute("/api/inquiry")({
   server: {
     handlers: {
-      POST: async ({ request }) => {
+      OPTIONS: ({ request }) => preflight(request),
+      POST: async ({ request }) => withCors(request, await handle(request)),
+    },
+  },
+});
+
+async function handle(request: Request): Promise<Response> {
         let data: Body;
         try {
           data = (await request.json()) as Body;
@@ -44,7 +51,4 @@ export const Route = createFileRoute("/api/inquiry")({
         });
         if (!res.ok) return new Response("Delivery failed", { status: 502 });
         return Response.json({ ok: true });
-      },
-    },
-  },
-});
+}

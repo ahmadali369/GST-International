@@ -1,5 +1,6 @@
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
 import { createFileRoute } from "@tanstack/react-router";
+import { corsHeaders, preflight, withCors } from "@/lib/cors.server";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
 
 const SYSTEM_PROMPT = `You are the GST Group FAQ assistant — a helpful, concise assistant for GST Group, an engineering and contracting group of companies.
@@ -25,21 +26,26 @@ type ChatRequestBody = { messages?: unknown };
 export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
+      OPTIONS: ({ request }) => preflight(request),
       POST: async ({ request }) => {
         let body: ChatRequestBody;
         try {
           body = (await request.json()) as ChatRequestBody;
         } catch {
-          return new Response("Invalid JSON body", { status: 400 });
+          return withCors(request, new Response("Invalid JSON body", { status: 400 }));
         }
         const { messages } = body ?? {};
         if (!Array.isArray(messages)) {
-          return new Response("Messages are required", { status: 400 });
+          return withCors(request, new Response("Messages are required", { status: 400 }));
+        }
+        // Keep a public endpoint cheap to abuse: cap conversation size.
+        if (messages.length > 30 || JSON.stringify(messages).length > 20000) {
+          return withCors(request, new Response("Conversation too long", { status: 413 }));
         }
 
         const key = process.env["LOVABLE_API_KEY"];
         if (!key) {
-          return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+          return withCors(request, new Response("Missing LOVABLE_API_KEY", { status: 500 }));
         }
 
         const gateway = createLovableAiGatewayProvider(key);
@@ -51,6 +57,7 @@ export const Route = createFileRoute("/api/chat")({
 
         return result.toUIMessageStreamResponse({
           originalMessages: messages as UIMessage[],
+          headers: corsHeaders(request),
         });
       },
     },
