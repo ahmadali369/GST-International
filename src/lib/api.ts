@@ -8,4 +8,5 @@ export const API_BASE: string = ((import.meta.env.VITE_API_BASE as string | unde
 export const apiUrl = (path: string) => `${API_BASE}${path}`;
 
 /** The chat needs a server; show it unless this is a static build with no API configured. */
-export const CHAT_AVAILABLE = !import.meta.env.VITE_STATIC_SITE || API_BASE !== "";
+export const CHAT_AVAILABLE =
+  !import.meta.env.VITE_STATIC_SITE || API_BASE !== "" || Boolean(import.meta.env.VITE_CHAT_API_KEY);

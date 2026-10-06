@@ -16,7 +16,8 @@ import {
   PromptInputSubmit,
 } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
-import { apiUrl } from "@/lib/api";
+import { API_BASE, apiUrl } from "@/lib/api";
+import { CLIENT_CHAT_ENABLED, clientChatFetch } from "@/lib/client-chat";
 import logo from "@/assets/gst-mark.png";
 
 const STORAGE_KEY = "gst-faq-chat";
@@ -44,7 +45,13 @@ export function FaqChat({ onClose }: { onClose: () => void }) {
   const { messages, sendMessage, status, setMessages, error } = useChat({
     id: "gst-faq",
     messages: loadMessages(),
-    transport: new DefaultChatTransport({ api: apiUrl("/api/chat") }),
+    transport: new DefaultChatTransport({
+      api: apiUrl("/api/chat"),
+      // No server configured: answer in the browser (static GitHub Pages site).
+      ...(API_BASE === "" && CLIENT_CHAT_ENABLED && import.meta.env.VITE_STATIC_SITE
+        ? { fetch: clientChatFetch }
+        : {}),
+    }),
   });
   const containerRef = useRef<HTMLDivElement>(null);
   const isLoading = status === "submitted" || status === "streaming";

@@ -32,6 +32,13 @@ jobs:
           # Set the repo variable API_BASE (Settings > Secrets and variables > Actions > Variables)
           # to your deployed Worker URL to enable the chat and server-side form delivery.
           VITE_API_BASE: ${{ vars.API_BASE }}
+          # Serverless alternatives (no server needed):
+          #   secret CHAT_API_KEY  -> chat answers straight from Google Gemini (restrict the key to this site!)
+          #   variable WEB3FORMS_KEY -> forms are emailed through Web3Forms
+          VITE_CHAT_API_KEY: ${{ secrets.CHAT_API_KEY }}
+          VITE_CHAT_BASE_URL: ${{ vars.CHAT_BASE_URL }}
+          VITE_CHAT_MODEL: ${{ vars.CHAT_MODEL }}
+          VITE_WEB3FORMS_KEY: ${{ vars.WEB3FORMS_KEY }}
           NODE_OPTIONS: --max-old-space-size=8192
         run: |
           npx vite build
